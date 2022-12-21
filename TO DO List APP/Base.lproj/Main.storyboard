@@ -254,16 +254,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="ZJN-Y3-0i2" userLabel="Home Stack View">
-                                <rect key="frame" x="15" y="92.999999999999986" width="384" height="147.66666666666663"/>
+                                <rect key="frame" x="15" y="93" width="384" height="652.66666666666663"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="AXk-vc-4M6" userLabel="Image&amp;BtnSV">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="55.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="163"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc.plaintext.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fTT-2J-Taw">
-                                                <rect key="frame" x="0.0" y="0.33333333333333215" width="384" height="20"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fTT-2J-Taw">
+                                                <rect key="frame" x="0.0" y="0.0" width="384" height="130.66666666666666"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2s-yY-tXG">
-                                                <rect key="frame" x="0.0" y="24.333333333333329" width="384" height="31"/>
+                                                <rect key="frame" x="0.0" y="134.66666666666666" width="384" height="28.333333333333343"/>
                                                 <color key="backgroundColor" systemColor="systemMintColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Change Photo">
@@ -279,19 +279,19 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="aon-WT-vmr" userLabel="MainStackView">
-                                        <rect key="frame" x="0.0" y="74.333333333333343" width="384" height="23.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="182" width="384" height="407"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="JMj-qG-cUC" userLabel="Todo Title SV">
-                                                <rect key="frame" x="0.0" y="0.0" width="384" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="384" height="178.66666666666666"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To do" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucb-6x-fd3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="89.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         <color key="textColor" systemColor="systemIndigoColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title Task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wW4-0n-GmC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="89.333333333333314" width="384" height="89.333333333333314"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -303,16 +303,16 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="MkZ-vc-hRJ" userLabel="Todo Details SV">
-                                                <rect key="frame" x="0.0" y="7" width="384" height="16.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="185.66666666666669" width="384" height="221.33333333333331"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHD-mw-USN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="10.333333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zgq-Iz-F7D">
-                                                        <rect key="frame" x="0.0" y="16.333333333333343" width="384" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="30" width="384" height="191.33333333333334"/>
                                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <color key="textColor" systemColor="labelColor"/>
@@ -331,10 +331,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="u3c-Yu-bjB" userLabel="ButtonSaveSV">
-                                        <rect key="frame" x="0.0" y="116.66666666666666" width="384" height="31"/>
+                                        <rect key="frame" x="0.0" y="608" width="384" height="44.666666666666629"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8k-iy-jkw">
-                                                <rect key="frame" x="0.0" y="0.0" width="384" height="31"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="384" height="44.666666666666664"/>
                                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Add">
@@ -411,7 +411,6 @@
     </scenes>
     <resources>
         <image name="Image-2" width="800" height="533"/>
-        <image name="doc.plaintext.fill" catalog="system" width="115" height="128"/>
         <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="plus.square.on.square" catalog="system" width="128" height="113"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>

@@ -22,7 +22,7 @@ class TodoDetailsVC: UIViewController {
         if todo.image != nil {
             todoImageDetails.image = todo.image
         }else{
-           todoImageDetails.image = UIImage(systemName: "doc.plaintext.fill")
+          // todoImageDetails.image = UIImage(systemName: "doc.plaintext.fill")
         }
         
         
