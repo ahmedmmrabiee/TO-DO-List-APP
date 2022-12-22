@@ -12,6 +12,7 @@ class AddingTasksVC: UIViewController {
     var editedTodo : Todo?
     var editedTodoIndex : Int?
     
+    @IBOutlet weak var changeOrAddPhotoBtn: UIButton!
     @IBOutlet weak var todoImageView: UIImageView!
     @IBOutlet weak var editOrAddButton: UIButton!
     @IBOutlet weak var taskTitleTextField: UITextField!
@@ -20,6 +21,7 @@ class AddingTasksVC: UIViewController {
         super.viewDidLoad()
         if !isCreation  {
             editOrAddButton.setTitle("SaveEditing", for: .normal)
+            changeOrAddPhotoBtn.setTitle("ChangePhoto", for: .normal)
             navigationItem.title = "Editig Task"
             
             if let todoBeforeEdit = editedTodo {

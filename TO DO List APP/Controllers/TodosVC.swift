@@ -6,19 +6,18 @@
 //
 
 import UIKit
-import CoreData
+
 
 class TodosVC: UIViewController {
 
     //var todosArr = [ Todo(title: "Goto the school", image: UIImage(named: "Image-1"),details: "iam going to school because my team will play in the league"), Todo(title: "Doing homwork", image: UIImage(named: "Image-2")), Todo(title: "Studing my lessons"), Todo(title: "Watching TV", image: UIImage(named: "Image-3")), Todo(title: "Go to the club", image: UIImage(named: "Image-4"))]
     
-    //comment
     
     var todosArr : [Todo] = []
     @IBOutlet weak var todosTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.todosArr = getTodoFromCoreData()
+        self.todosArr = TodoStorage.getTodoFromCoreData()
         
         // recieve notification which add new todo
         NotificationCenter.default.addObserver(self, selector: #selector(addNewTaskNotification(notific:)), name: NSNotification.Name(rawValue: "NewTaskTodoAdded"), object: nil)
@@ -40,7 +39,7 @@ class TodosVC: UIViewController {
         if let newTodo = notific.userInfo?["addedTask"] as? Todo{
             todosArr.append(newTodo)
             todosTableView.reloadData()
-            storeTodo(todo: newTodo)
+            TodoStorage.storeTodo(todo: newTodo)
         }
         //print(notific.userInfo? ["addedTask"])
         print("Added done")
@@ -52,7 +51,7 @@ class TodosVC: UIViewController {
             if let indexx = recieve.userInfo?["EditedTodoIndex"] as? Int{
                 todosArr[indexx] = updatedTodo
                 todosTableView.reloadData()
-                updateTodoInCoreData(todoUpdated: updatedTodo, index: indexx)
+                TodoStorage.updateTodoInCoreData(todoUpdated: updatedTodo, index: indexx)
             }
           
         }
@@ -64,99 +63,18 @@ class TodosVC: UIViewController {
         if let removeIndex = deleteNotification.userInfo?["deletedTodoIndex"] as? Int{
          todosArr.remove(at: removeIndex)
          todosTableView.reloadData()
-            deletingTodoFromCoreData(index: removeIndex)
+            TodoStorage.deletingTodoFromCoreData(index: removeIndex)
             print("Deleted Done")
         }
     }
     
-    //func storeTodoInCoreData
-    func storeTodo(todo: Todo){
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{return}
-        let managedContext = appDelegate.persistentContainer.viewContext
-        guard let todoEntity = NSEntityDescription.entity(forEntityName: "TodoData", in: managedContext) else {return}
-        let todoObject = NSManagedObject.init(entity: todoEntity, insertInto: managedContext)
-        todoObject.setValue(todo.title, forKey: "title")
-        todoObject.setValue(todo.details, forKey: "details")
-        
-        if let photo = todo.image {
-           // let photoCoreData = photo.jpegData(compressionQuality: 0.8)
-            let photoCoreData = photo.pngData()
-            todoObject.setValue(photoCoreData, forKey: "image")
-        }
-
-        do {
-            try managedContext.save()
-            print("-----------success------------")
-        } catch{
-            print("********--------error saving in CoreData----------******")
-        }
-
-    }
+   
     
-    //func retrieveDataFromCoreData()
-    func getTodoFromCoreData() -> [Todo]{
-        var todos : [Todo] = []
-        
-        guard let appDelgateRetrive = UIApplication.shared.delegate as? AppDelegate else {return []}
-        let context = appDelgateRetrive.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TodoData")
-        do {
-            let resultData = try context.fetch(fetchRequest) as! [NSManagedObject]
-            for managedTodo in resultData {
-                let titleCore = managedTodo.value(forKey: "title") as? String
-                let detailsCore = managedTodo.value(forKey: "details") as? String
-                var imageCore : UIImage? 
-                if let imageFromContext = managedTodo.value(forKey: "image") as? Data {
-                     imageCore = UIImage(data: imageFromContext)
-                }
-                let todoCore = Todo(title: titleCore!, image: imageCore, details: detailsCore)
-                todos.append(todoCore)
-            }
-        } catch {
-            print("*************error in retrive data from coreData*****************")
-        }
-        
-        return todos
-    }
+   
     
-    //func updateDataAfterEditInCoreData()
-    func updateTodoInCoreData(todoUpdated: Todo, index: Int){
-        
-        guard let appDelgateUpdate = UIApplication.shared.delegate as? AppDelegate else {return}
-        let updateContext = appDelgateUpdate.persistentContainer.viewContext
-        let fetchRequestUpdate = NSFetchRequest<NSFetchRequestResult>(entityName: "TodoData")
-        do {
-            let resultDataUpdated = try updateContext.fetch(fetchRequestUpdate) as! [NSManagedObject]
-            resultDataUpdated[index].setValue(todoUpdated.title, forKey: "title")
-            resultDataUpdated[index].setValue(todoUpdated.details, forKey: "details")
-            if let photo = todoUpdated.image {
-                let imageCoreData = photo.pngData()
-                resultDataUpdated[index].setValue(imageCoreData, forKey: "image")
-            }
-            try updateContext.save()
-        
-        }
-        catch {
-            print("************* Error in Update data in coreData *****************")
-        }
-    }
     
-    //func deleteTodoFromCoreData()
-    func deletingTodoFromCoreData(index: Int){
-        guard let appDelgate = UIApplication.shared.delegate as? AppDelegate else {return}
-        let context = appDelgate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TodoData")
-        
-        do {
-            let result = try context.fetch(fetchRequest) as! [NSManagedObject]
-            let todoToDelete = result[index]
-            context.delete(todoToDelete)
-            
-            try context.save()
-        }catch{
-            print("****** Error in deleting todo from core data ********")
-        }
-    }
+    
+   
     
 //    @objc func deleteTodo(deleteNotification: Notification){
 //        print("warning you deleted this Todo from TodosVC")
