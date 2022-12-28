@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import AlertController
 class AddingTasksVC: UIViewController {
     var isCreation = true
     var editedTodo : Todo?
@@ -29,6 +29,8 @@ class AddingTasksVC: UIViewController {
                 taskDetailsTV.text = todoBeforeEdit.details
                 todoImageView.image = todoBeforeEdit.image
             }
+        } else{
+            
         }
     }
     
@@ -45,25 +47,46 @@ class AddingTasksVC: UIViewController {
           if let taskTitle = taskTitleTextField.text {
               let todoTask = Todo(title: taskTitle, image: todoImageView.image, details: taskDetailsTV.text)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewTaskTodoAdded"), object: nil, userInfo: ["addedTask": todoTask])
-             // showAlert(alertTitle: "Adding New Todo", alertMessage: "successfully adding of new Todo")
             }
-         showAlert(alertTitle: "Adding New Todo", alertMessage: "successfully adding of new Todo")
+            //showAlert(alertTitle: "Adding New Todo", alertMessage: "successfully adding of new Todo")
+            showSuccessAlert(msg: "Your Todo has been added successfully")
         }else{
-            
             //edit the Todo
             let todoAfterEdit = Todo(title: taskTitleTextField.text!, image: todoImageView.image, details: taskDetailsTV.text)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CurrentTodoEdited"), object: nil, userInfo: ["UpdateTodoEdited": todoAfterEdit, "EditedTodoIndex": editedTodoIndex! ])
+            let alert = UIAlertController.alert()
+            alert.setTitle("📝 Editing", color: .systemRed)
+            alert.setMessage("Are you sure to save the changes?")
+            alert.addAction(
+                title: "Cancel",
+                //systemIcon: "checkmark.bubble"
+                color: .systemBlue ){
+                    self.navigationController?.popViewController(animated: true)
+                }
             
-            let alert = UIAlertController(title: "Editing", message: "successfully editing of Todo", preferredStyle: .alert)
-            let okAlertButton = UIAlertAction(title: "ok", style: .cancel) {action in
-                self.navigationController?.popViewController(animated: true)
-                
-                self.taskTitleTextField.text = ""
-            }
-            alert.addAction(okAlertButton)
+            alert.addAction(
+                       title: "Save",
+                       //systemIcon: "checkmark.bubble"
+                       color: .systemRed
+                       )
+            {
+                 let newAlert = UIAlertController.alert()
+                   newAlert.setTitle("✅ Success", color: .systemMint)
+                   newAlert.setMessage("Your Todo has been Edited successfully")
+                   newAlert.addAction(
+                        title: "Ok",
+                        //systemIcon: "checkmark.bubble"
+                        color: .systemBlue ){
+                        self.navigationController?.popViewController(animated: true)
+                               }
+                   self.present(newAlert, animated: true)
+                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CurrentTodoEdited"), object: nil, userInfo: ["UpdateTodoEdited": todoAfterEdit, "EditedTodoIndex": self.editedTodoIndex! ])
+                           
+                  self.navigationController?.popViewController(animated: true)
+                   }
             present(alert, animated: true)
-
+          
         }
+           
         
     }
     
@@ -77,13 +100,23 @@ class AddingTasksVC: UIViewController {
         alert.addAction(okAlertButton)
         present(alert, animated: true)
     }
+    func showSuccessAlert(msg: String){
+        let alert = UIAlertController.alert()
+        alert.setTitle("✅ Success", color: .systemMint)
+        alert.setMessage(msg)
 
-    func goToNextView (vcID: String){
-        if let newVC = storyboard?.instantiateViewController(withIdentifier: vcID) {
-            navigationController?.pushViewController(newVC, animated: true)
-        }
+        alert.addAction(
+                   title: "Ok",
+                   //systemIcon: "checkmark.bubble"
+                   color: .systemBlue
+                   ) {
+                    self.tabBarController?.selectedIndex = 0
+                  self.taskTitleTextField.text = ""
+                   
+               }
+        present(alert, animated: true)
     }
-   
+    
 }
 
 extension AddingTasksVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
@@ -94,8 +127,7 @@ extension AddingTasksVC: UIImagePickerControllerDelegate, UINavigationController
         } else {
             print("error Photo")
         }
-       
-        
+      
     }
 }
 

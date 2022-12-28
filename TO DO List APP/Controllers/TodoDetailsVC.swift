@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import AlertController
 class TodoDetailsVC: UIViewController {
 
     @IBOutlet weak var todoSubjectDetailsLabel: UILabel!
@@ -58,7 +58,34 @@ class TodoDetailsVC: UIViewController {
     }
     
     @IBAction func deleteTodoButton(_ sender: Any) {
-        let alertDelete = UIAlertController(title: "Attention", message: "Are you sure to delete this todo", preferredStyle: .alert)
+        let deleteAlert = UIAlertController.alert()
+        deleteAlert.setTitle("⚠️Warning", color: .systemRed)
+        deleteAlert.setMessage("Are you sure to delete this Todo?")
+        deleteAlert.addAction(
+            title: "Cancel",
+            //systemIcon: "checkmark.bubble"
+            color: .systemBlue ){
+                //self.navigationController?.popViewController(animated: true)
+            }
+        deleteAlert.addAction(title: "Delete",
+                              //systemIcon: "checkmark.bubble",
+                              color: .systemRed){
+            
+          let newAlert = UIAlertController.alert()
+              newAlert.setTitle("✅ Success", color: .systemMint)
+              newAlert.setMessage("Your Todo has been Deleted successfully")
+              newAlert.addAction(title: "Ok",//systemIcon: "checkmark.bubble"
+                      color: .systemBlue ){
+               self.navigationController?.popViewController(animated: true)
+           }
+            self.present(newAlert, animated: true)
+             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DeleteTodo"), object: nil, userInfo: ["deletedTodoIndex":self.currentIndex!])
+                       
+            self.navigationController?.popViewController(animated: true)
+    }
+           present(deleteAlert, animated: true)
+                   
+     /*   let alertDelete = UIAlertController(title: "Attention", message: "Are you sure to delete this todo", preferredStyle: .alert)
         let deleteButton = UIAlertAction(title: "Delete", style: .destructive) { deleteAction in
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DeleteTodo"), object: nil, userInfo: ["deletedTodoIndex":self.currentIndex!])
             
@@ -74,6 +101,7 @@ class TodoDetailsVC: UIViewController {
                 alertDelete.addAction(deleteButton)
                 alertDelete.addAction(cancelButton)
             present(alertDelete, animated: true)
-        }
+      */
+    }
   
 }

@@ -1,0 +1,21 @@
+PODS:
+  - AlertController (0.0.3)
+
+DEPENDENCIES:
+  - AlertController (from `https://github.com/mezhevikin/AlertController.git`)
+
+EXTERNAL SOURCES:
+  AlertController:
+    :git: https://github.com/mezhevikin/AlertController.git
+
+CHECKOUT OPTIONS:
+  AlertController:
+    :commit: aa6745b8bfa6de2ae7783e39148baf20df9c76b1
+    :git: https://github.com/mezhevikin/AlertController.git
+
+SPEC CHECKSUMS:
+  AlertController: 5e2d88454c2da8aef3c8501198eb7823344ce9dd
+
+PODFILE CHECKSUM: 5a83fc264eb074cb3b7d69f61a4fd6f50649806d
+
+COCOAPODS: 1.11.3
